@@ -1,36 +1,37 @@
 package controllers;
+import models.Person;
 
 public class SortingMethods {
 
-    //Ordenar por nombre, con ordenamiento Burbuja Mejorado
-    public void sortByNameWithBubble(int[] arreglo){
-        int aux;
-      
-        for(int i = 0; i < arreglo.length; i++){
+    private Person[] persons;
 
-            for (int j = 0; j < arreglo.length - i - 1; j++){ //SE OMITE comparar posiciones ya ordenadas 
+    //Ordenar por nombre, con ordenamiento Burbuja Mejorado
+    public void sortByNameWithBubble(Person[] persons){
+      
+        for(int i = 0; i < persons.length; i++){
+
+            for (int j = 0; j < persons.length - i - 1; j++){ //SE OMITE comparar posiciones ya ordenadas 
                 					                           
-                if(arreglo[j] > arreglo[j + 1]){
-                    aux = arreglo[j]; 
-                    arreglo[j] = arreglo[j + 1];
-                    arreglo[j + 1] = aux;  
+                if(persons[j].getName().compareToIgnoreCase(persons[j + 1].getName()) > 0){
+                    Person aux = persons[j];
+                    persons[j] = persons[j + 1];
+                    persons[j + 1] = aux;  
                 }
             } 
         }
     }
 
     //Método Ordenamiento Selección 
-    public void sortByNameWithSelection(int[] arreglo){
-        int aux;
+    public void sortByNameWithSelection(Person[] persons){
         int indiceMin;
 
-        for(int i = 0; i < arreglo.length - 1; i++){    //NO necesitamos llegar hasta el final del arreglo
+        for(int i = 0; i < persons.length - 1; i++){    //NO necesitamos llegar hasta el final del arreglo
 
             indiceMin = i; //Toma como si el número menor estuviera en la posición i
 
 	        //SEGUNDO FOR, sirve para encontrar la posición del número menor del arreglo
-            for(int j = i + 1; j < arreglo.length; j++){                 
-                if(arreglo[j] < arreglo[indiceMin]){ //si el valor de j es menor al guardado en arreglo[indiceMin]
+            for(int j = i + 1; j < persons.length; j++){                 
+                if(persons[j].getName().compareToIgnoreCase(persons[indiceMin].getName()) < 0){ //si el valor de j es menor al guardado en arreglo[indiceMin]
                         indiceMin = j;   //hacemos que indiceMin tome el valor de la posición de dicho numero
                         
                 }
@@ -38,57 +39,49 @@ public class SortingMethods {
             
             //Se intercambia unicamente cuando se ha encontrado otro valor menor diferente al tomado por referencia (indiceMin = i)
             if(indiceMin != i){ 
-                aux = arreglo[i]; 
-                arreglo[i] = arreglo[indiceMin];
-                arreglo[indiceMin] = aux;
+                Person aux = persons[i]; 
+                persons[i] = persons[indiceMin];
+                persons[indiceMin] = aux;
             }
         }
     }
 
-    public void sortByAgeWithInsertion(int[] arreglo){
+    public void sortByAgeWithInsertion(Person[] persons){
 
-        int pasajero;
-     
-        for(int i = 1; i < arreglo.length; i++){
-            pasajero = arreglo[i];
+        for(int i = 1; i < persons.length; i++){
+            Person pasajero = persons[i];
             int j = i - 1; 
 	    
 	        //j recorre hacia la izquierda 
 	        //si j es mayor al valor de pasajero, se cambian de lugar
 
-            while(j >=  0 && (arreglo[j] > pasajero)){ // si el arreglo[j] es mayor a pasajeros, entra dentro del bucle
-                arreglo[j + 1] = arreglo[j];
+            while(j >=  0 && (persons[j].getAge() > pasajero.getAge())){ // si el arreglo[j] es mayor a pasajeros, entra dentro del bucle
+                persons[j + 1] = persons[j];
                 j--; 
             }
 		
-	        //si encontre un valor mayor a la izquierda de pasajero, cambiamos de orden
-            if(arreglo[j + 1] != pasajero){
-                arreglo[j + 1] = pasajero;
-            }
+            persons[j + 1] = pasajero;
         }
     }
 
-    public void sortByNameWithInsertion(int[] arreglo){
+    public void sortByNameWithInsertion(Person[] persons){
 
-        int pasajero;
+        Person pasajero;
      
-        for(int i = 1; i < arreglo.length; i++){
-            pasajero = arreglo[i];
+        for(int i = 1; i < persons.length; i++){
+            pasajero = persons[i];
             int j = i - 1; 
 	    
 	        //j recorre hacia la izquierda 
 	        //si j es mayor al valor de pasajero, se cambian de lugar
 
-            while(j >=  0 && (arreglo[j] > pasajero)){ // si el arreglo[j] es mayor a pasajeros, entra dentro del bucle
-                arreglo[j + 1] = arreglo[j];
+            while(j >=  0 && (persons[j].getName().compareToIgnoreCase(pasajero.getName()) > 0)){ // si el arreglo[j] es mayor a pasajeros, entra dentro del bucle
+                persons[j + 1] = persons[j];
                 j--; 
             }
 		
 	        //si encontre un valor mayor a la izquierda de pasajero, cambiamos de orden
-            if(arreglo[j + 1] != pasajero){
-                arreglo[j + 1] = pasajero;
-            }
+            persons[j + 1] = pasajero;
         }
     }
-
 }

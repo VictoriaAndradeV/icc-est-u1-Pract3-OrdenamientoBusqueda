@@ -28,29 +28,43 @@ public class View {
     //Permite seleccionar el Metodo de Ordenamiento
     public int selectSortingMethod(){
         System.out.println("Seleccione un Método de Ordenamiento");
-        System.out.println("1. Ordenamiento Burbuja");
-        System.out.println("2. Metodo de Seleccion");
-        System.out.println("3. Metodo Insercion");
-        System.out.println("4. Ordenamiento Burbuja Mejodado");
+        System.out.println("1. Ordenamiento Burbuja, ordenado por nombre");
+        System.out.println("2. Metodo de Seleccion, ordenado por nombre");
+        System.out.println("3. Metodo Insercion, ordenado por edades");
+        System.out.println("4. Metodo Insercion, ordenado por nombre");
         int opcion = validarOpcion(scanner, 1, 4); 
         return opcion;
     }
     //seleccionamos el metodo de busqueda que el usuario desee
     public int selectSearchCriterion(){
         System.out.println("Seleccione un Método de Busqueda");
-        System.out.println("1. Busqueda Secuencial");
-        System.out.println("2. Busqueda Binaria");
+        System.out.println("1. Busqueda Binaria, por edad");
+        System.out.println("2. Busqueda Binaria, por nombre");
         int opcion = validarOpcion(scanner, 1, 2);
         return opcion;
     }
 
+    //Muestra el listado de personas
+    public void displayPersons(Person[] persons){
+        if((persons == null) || (persons.length == 0)){
+            System.out.println("No existen personas registradas.");
+        } else {
+            System.out.println("------ Listado de personas registradas ------");
+            for(int i = 0; i < persons.length; i++){
+                System.out.println("Persona " +(i + 1)+ "--> " +persons[i]); //se imprime con ayuda del toString
+            }
+        }
+    }
+
     //inputAge sirve para ingresar la edad a buscar 
     public int inputAge(){
+        System.out.println("Ingrese la edad que desea buscar -->");
         int edad = validarIngresoEdad(scanner);
         return edad;
     }
     //ingresamos el nombre que se desea buscar
     public String inputName(){
+        System.out.println("Ingrese el Nombre que desea buscar -->");
         String nombre = validarIngresoNombre(scanner);
         return nombre;
     }
@@ -102,7 +116,7 @@ public class View {
         int edad;
 
         do { 
-            System.out.println("Ingrese la Edad --> ");
+            System.out.println("Edad --> ");
 
             if(scanner.hasNextInt()){ //validar ingreso de numeros
                 edad = scanner.nextInt();
@@ -118,5 +132,4 @@ public class View {
             }   
         } while (true);
     }
-
 }
