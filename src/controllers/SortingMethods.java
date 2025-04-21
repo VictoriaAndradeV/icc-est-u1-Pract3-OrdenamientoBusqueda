@@ -2,27 +2,25 @@ package controllers;
 
 public class SortingMethods {
 
-    //Metodo de Ordenamiento Burbuja
-    public void ordenadoBurbuja(int[] arreglo){
+    //Ordenar por nombre, con ordenamiento Burbuja Mejorado
+    public void sortByNameWithBubble(int[] arreglo){
+        int aux;
+      
+        for(int i = 0; i < arreglo.length; i++){
 
-        int aux;  
-
-        for(int i = 0; i < arreglo.length - 1; i++){  //NO necesitamos comparar hasta el final del arreglo
-
-            for (int j = 0; j < arreglo.length - 1; j++){
-                
-                if(arreglo [j] > arreglo[j + 1]){
-                        aux = arreglo[j];   
-                        arreglo[j] = arreglo[j + 1]; 
-                        arreglo[j + 1] = aux;  
+            for (int j = 0; j < arreglo.length - i - 1; j++){ //SE OMITE comparar posiciones ya ordenadas 
+                					                           
+                if(arreglo[j] > arreglo[j + 1]){
+                    aux = arreglo[j]; 
+                    arreglo[j] = arreglo[j + 1];
+                    arreglo[j + 1] = aux;  
                 }
-            }
+            } 
         }
-        
     }
 
     //Método Ordenamiento Selección 
-    public void ordenadoSeleccion(int[] arreglo){
+    public void sortByNameWithSelection(int[] arreglo){
         int aux;
         int indiceMin;
 
@@ -47,13 +45,12 @@ public class SortingMethods {
         }
     }
 
-    public void ordenadoInsercion(int[] arreglo){
+    public void sortByAgeWithInsertion(int[] arreglo){
 
         int pasajero;
      
         for(int i = 1; i < arreglo.length; i++){
             pasajero = arreglo[i];
-
             int j = i - 1; 
 	    
 	        //j recorre hacia la izquierda 
@@ -68,23 +65,29 @@ public class SortingMethods {
             if(arreglo[j + 1] != pasajero){
                 arreglo[j + 1] = pasajero;
             }
-
         }
     }
 
-    public void odenadoBurbujaMejorado(int[] arreglo){
-        int aux;
-      
-        for(int i = 0; i < arreglo.length; i++){
+    public void sortByNameWithInsertion(int[] arreglo){
 
-            for (int j = 0; j < arreglo.length - i - 1; j++){ //SE OMITE comparar posiciones ya ordenadas 
-                					                           
-                if(arreglo[j] > arreglo[j + 1]){
-                    aux = arreglo[j]; 
-                    arreglo[j] = arreglo[j + 1];
-                    arreglo[j + 1] = aux;  
-                }
-            } 
+        int pasajero;
+     
+        for(int i = 1; i < arreglo.length; i++){
+            pasajero = arreglo[i];
+            int j = i - 1; 
+	    
+	        //j recorre hacia la izquierda 
+	        //si j es mayor al valor de pasajero, se cambian de lugar
+
+            while(j >=  0 && (arreglo[j] > pasajero)){ // si el arreglo[j] es mayor a pasajeros, entra dentro del bucle
+                arreglo[j + 1] = arreglo[j];
+                j--; 
+            }
+		
+	        //si encontre un valor mayor a la izquierda de pasajero, cambiamos de orden
+            if(arreglo[j + 1] != pasajero){
+                arreglo[j + 1] = pasajero;
+            }
         }
     }
 

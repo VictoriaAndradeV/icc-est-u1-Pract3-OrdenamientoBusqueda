@@ -5,15 +5,15 @@ public class Person {
     private int age;
 
     public Person(){ //Constructor vacío
-        
     }
 
     public Person(String name, int age) { 
         this.name = name;
         this.age = age;
     }
-    //Getters y Setters 
-    public String getName() { //Getter para acceder al atributo name de Persona
+
+    //Creacion de Getters y Setters 
+    public String getName() { 
         return name;
     }
     public void setName(String name) {
