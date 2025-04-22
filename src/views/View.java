@@ -3,7 +3,7 @@ import java.util.Scanner;
 import models.Person;
 
 public class View {
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     public int showMenu(){
         System.out.println("--------- Menu --------- ");
@@ -88,7 +88,7 @@ public class View {
 
             if(scanner.hasNextInt()){ //validar ingreso de numeros
                 num = scanner.nextInt();
-                scanner.next();
+                scanner.nextLine();
 
                 if((num < min) || (num > max)){ //validar que el rango de edad
                     System.out.println("Ingrese una opcion valida desde -> " +min+" hasta " +max);
@@ -97,7 +97,7 @@ public class View {
                 }
             } else{
                 System.out.println("Ingrese unicamente numeros, no letras ni caracteres especiales");
-                scanner.next(); //limpiar token invalido ingresado, para evitar que scanner se trabe 
+                scanner.nextLine(); //limpiar token invalido ingresado, para evitar que scanner se trabe 
             }   
         } while (true);
     }
@@ -112,12 +112,10 @@ public class View {
             nombre = scanner.nextLine().trim(); //acepta el ingreso de nombres con espacios
 
             if(nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]+")){ //valida el ingreso de un string valido, con letras de todo el alfabeto
-                
                 return nombre;                                 //valida tildes, Ñ - ñ
             } else {
-                System.out.println("Ingrese unicamente letras, no numeros");
+                System.out.println("Ingrese unicamente letras, no numeros, no caracteres especiales");
             }
-            
         } while (true);
     }
 

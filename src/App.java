@@ -9,7 +9,6 @@ public class App {
         View view = new View();
         SortingMethods sortingMethods = new SortingMethods();
         SearchMethods searchMethods = new SearchMethods();
-
         Controller controllers = new Controller(view, sortingMethods, searchMethods);
 
         controllers.start();

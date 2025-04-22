@@ -4,37 +4,42 @@ import views.View;
 
 //Controla no muestra informacion ni implementa algoritmos de busqueda y ordenamiento, solo coordina
 public class Controller {
-    private View views;
+    private final View views;
     private Person[] persons;
-    private SortingMethods sortingMethods; //no necesitamos importar la clase porque se encuentra en el mismo paquete
-    private SearchMethods searchMethods;
+    private final SortingMethods sortingMethods; //no necesitamos importar la clase porque se encuentra en el mismo paquete
+    private final SearchMethods searchMethods;
     
     public Controller(View views, SortingMethods sortingMethods, SearchMethods searchMethods) {
         this.views = views;
         this.sortingMethods = sortingMethods;
         this.searchMethods = searchMethods;
-        this.persons = new Person[0];
+        this.persons = new Person[] {};
     }
 
     public void start(){
         boolean a = true;
 
         while(a){
+            
             int opcion = views.showMenu();
 
             switch(opcion){
-                case 1 -> inputPerson();
-                case 2 -> views.displayPersons(persons);
-                case 3 -> sortPersons();
-                case 4 -> searchPerson();
-                case 5 -> {
-                }
-                case 6 -> {
-                }
-                case 7 -> a = false;
+                case 1:
+                    inputPerson();
+                    break;
+                case 2:
+                    views.displayPersons(persons);
+                    break;
+                case 3:
+                    sortPersons();
+                    break;
+                case 4:
+                    searchPerson();
+                    break;
+                case 5: 
+                    a = false;
             }
         }
-        
     }
 
     public void inputPerson(){
@@ -43,18 +48,14 @@ public class Controller {
     }
 
     public void addPerson(Person person){
-        if(persons == null){ //si el arreglo esta vacio, se crea un arreglo con una posicion
-            persons = new Person[1];
-            persons[0] = person; //se asigna a la primera persona ingresada, a la primera posicion del arreglo
-        } else { //si el arreglo ya contiene mas presonas 
-            Person arreglo[] = new Person[persons.length + 1]; //guarda personas anteriores + la ingresada
+        Person arreglo[] = new Person[persons.length + 1]; //guarda personas anteriores + la ingresada
             
-            for(int i = 0; i < persons.length; i++){
-                arreglo[i] = persons[i];
-            }
-            arreglo[arreglo.length - 1] = person;
-            persons = arreglo;
+        for(int i = 0; i < persons.length; i++){
+            arreglo[i] = persons[i];
         }
+        arreglo[arreglo.length - 1] = person;
+        persons = arreglo;
+    
     }
 
     public void sortPersons(){
@@ -64,12 +65,20 @@ public class Controller {
         int opcion = views.selectSortingMethod();
 
         switch(opcion){
-            case 1 -> sortingMethods.sortByNameWithBubble(persons);
-            case 2 -> sortingMethods.sortByNameWithSelection(persons);
-            case 3 -> sortingMethods.sortByAgeWithInsertion(persons);
-            case 4 -> sortingMethods.sortByNameWithInsertion(persons);
-            case 5 -> {
-            }
+            case 1: 
+                sortingMethods.sortByNameWithBubble(persons);
+                break;
+            case 2:
+                sortingMethods.sortByNameWithSelection(persons);
+                break;
+            case 3:
+                sortingMethods.sortByAgeWithInsertion(persons);
+                break;
+            case 4:
+                sortingMethods.sortByNameWithInsertion(persons);
+                break;
+            case 5:
+                break;
         }
 
         System.out.println("Listado de personas ordenado correctamente");
@@ -115,9 +124,5 @@ public class Controller {
             case 3 -> {
             }
         }
-
-        
-
     }
-
 }
