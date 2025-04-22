@@ -49,5 +49,25 @@ public class SearchMethods {
         }
         return -1;
     }
+    
+    //Metodo que verifica si el arreglo esta ordenado, si lo está, pasamos directamente al metodo busqueda 
+    public boolean isSortByAge(Person[] persons){ 
+        for(int i = 0; i < persons.length - 1; i++){
+            if(persons[i].getAge() > persons[i + 1].getAge()){ //si el valor en i es mayor al siguiente valor, quiere decir que
+                return false;                                  //NO esta ordenado
+            }
+        }
+        return true;
+    }
+
+    //Metodo que verifica si el arreglo está ordenado por nombre
+    public boolean isSortByName(Person[] persons){
+        for(int i = 0; i < persons.length - 1; i++){
+            if(persons[i].getName().compareToIgnoreCase(persons[i + 1].getName()) > 0 ){
+                return false; //  retorna false, si el arreglo esta desordenado
+            }
+        }
+        return true; // no se debe ordenar
+    }
 
 }

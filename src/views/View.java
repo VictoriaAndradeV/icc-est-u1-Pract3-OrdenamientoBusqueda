@@ -11,9 +11,8 @@ public class View {
         System.out.println("2. Mostrar personas agregadas");
         System.out.println("3. Seleccione un método de Ordenamiento");
         System.out.println("4. Seleccione un método de Busqueda");
-        System.out.println("5. Mostrar resultados de Busqueda");
-        System.out.println("6. Salir");
-        int opcion = validarOpcion(scanner, 1, 6);
+        System.out.println("5. Salir");
+        int opcion = validarOpcion(scanner, 1, 5);
         return opcion;
     }
 
@@ -32,7 +31,8 @@ public class View {
         System.out.println("2. Metodo de Seleccion, ordenado por nombre");
         System.out.println("3. Metodo Insercion, ordenado por edades");
         System.out.println("4. Metodo Insercion, ordenado por nombre");
-        int opcion = validarOpcion(scanner, 1, 4); 
+        System.out.println("5. Salir");
+        int opcion = validarOpcion(scanner, 1, 5); 
         return opcion;
     }
     //seleccionamos el metodo de busqueda que el usuario desee
@@ -40,7 +40,8 @@ public class View {
         System.out.println("Seleccione un Método de Busqueda");
         System.out.println("1. Busqueda Binaria, por edad");
         System.out.println("2. Busqueda Binaria, por nombre");
-        int opcion = validarOpcion(scanner, 1, 2);
+        System.out.println("3. Salir");
+        int opcion = validarOpcion(scanner, 1, 3);
         return opcion;
     }
 
@@ -54,6 +55,15 @@ public class View {
                 System.out.println("Persona " +(i + 1)+ "--> " +persons[i]); //se imprime con ayuda del toString
             }
         }
+    }
+
+    public void displaySearchResult(Person persons){
+        if(persons != null){
+            System.out.println("Persona encontrada --> " +persons);
+        } else {
+            System.out.println("La persona que buscaba, no ha sido encontrada" );
+        }
+        
     }
 
     //inputAge sirve para ingresar la edad a buscar 

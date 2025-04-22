@@ -4,7 +4,7 @@ import models.Person;
 public class SortingMethods {
 
     private Person[] persons;
-
+    //todos los metodos ordenan el arreglo Person[] de forma ascendente 
     //Ordenar por nombre, con ordenamiento Burbuja Mejorado
     public void sortByNameWithBubble(Person[] persons){
       

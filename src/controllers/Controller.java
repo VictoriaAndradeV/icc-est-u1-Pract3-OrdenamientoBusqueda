@@ -23,21 +23,15 @@ public class Controller {
             int opcion = views.showMenu();
 
             switch(opcion){
-
-                case 1:
-                    inputPerson();
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    break;
-                case 6:
-                    a = false; 
-                    break;
+                case 1 -> inputPerson();
+                case 2 -> views.displayPersons(persons);
+                case 3 -> sortPersons();
+                case 4 -> searchPerson();
+                case 5 -> {
+                }
+                case 6 -> {
+                }
+                case 7 -> a = false;
             }
         }
         
@@ -63,6 +57,67 @@ public class Controller {
         }
     }
 
+    public void sortPersons(){
+        if((persons == null) || (persons.length == 0)){
+            System.out.println("No hay registros de personas por ordenar");
+        }
+        int opcion = views.selectSortingMethod();
 
+        switch(opcion){
+            case 1 -> sortingMethods.sortByNameWithBubble(persons);
+            case 2 -> sortingMethods.sortByNameWithSelection(persons);
+            case 3 -> sortingMethods.sortByAgeWithInsertion(persons);
+            case 4 -> sortingMethods.sortByNameWithInsertion(persons);
+            case 5 -> {
+            }
+        }
+
+        System.out.println("Listado de personas ordenado correctamente");
+        views.displayPersons(persons);
+    }
+
+    public void searchPerson(){
+        if((persons == null) || (persons.length == 0)){
+            System.out.println("No hay registros de personas por buscar");
+        }
+
+        int opcion = views.selectSearchCriterion();
+
+        switch(opcion){
+            case 1 -> {
+                //Busqueda por edad
+                if(!searchMethods.isSortByAge(persons)){ //
+                    sortingMethods.sortByAgeWithInsertion(persons);
+                }
+                int edadBuscada = views.inputAge();
+                int index = searchMethods.binarySearchByAge(persons, edadBuscada);
+
+                if(index >= 0){ //quiere decir que si se encontro la persona
+                    views.displaySearchResult(persons[index]);
+                }else{ //si no la encuentra es porque retorno -1
+                    views.displaySearchResult(null);
+                }
+            }
+            case 2 -> {
+                //Busqueda por nombre
+                if(!searchMethods.isSortByName(persons)){
+                    sortingMethods.sortByNameWithSelection(persons);
+                }
+                String nombreBuscado = views.inputName();
+                int index = searchMethods.binarySearchByName(persons, nombreBuscado);
+
+                if(index >= 0){ //quiere decir que si se encontro la persona 
+                    views.displaySearchResult(persons[index]);
+                }else{
+                    views.displaySearchResult(null);
+                }
+            }
+            case 3 -> {
+            }
+        }
+
+        
+
+    }
 
 }
