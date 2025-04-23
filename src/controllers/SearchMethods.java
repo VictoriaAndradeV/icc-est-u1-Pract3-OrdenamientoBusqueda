@@ -4,8 +4,6 @@ import models.Person;
 
 public class SearchMethods {
 
-    private Person[] persons;
-
     //Busqueda por Edad
     public int binarySearchByAge(Person[] persons, int edad){
         int bajo = 0;

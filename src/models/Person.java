@@ -1,12 +1,17 @@
 package models;
 
+/*
+ * Representa el modelo de datos, permite crear objetos tipo Person, con atributos nombre y edad
+ */
+
 public class Person {
     private String name; //atributos de Person
     private int age;
 
     public Person(){ //Constructor vacío
-    }
+    } 
 
+    //Sobrecarga de constructores, pasamos parámetros
     public Person(String name, int age) { 
         this.name = name;
         this.age = age;

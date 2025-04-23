@@ -3,16 +3,18 @@ import models.Person;
 
 public class SortingMethods {
 
-    private Person[] persons;
-    //todos los metodos ordenan el arreglo Person[] de forma ascendente 
-    //Ordenar por nombre, con ordenamiento Burbuja Mejorado
+    /*
+     * Metodo de ordenamiento burbuja mejorado, ordena por nombre el arreglo de personas
+     * 
+     * Dentro del if
+     * cuando es > 0 quiere decir que persons[j] va despues de persons[j+1]
+     */
     public void sortByNameWithBubble(Person[] persons){
       
         for(int i = 0; i < persons.length; i++){
-
             for (int j = 0; j < persons.length - i - 1; j++){ //SE OMITE comparar posiciones ya ordenadas 
                 					                           
-                if(persons[j].getName().compareToIgnoreCase(persons[j + 1].getName()) > 0){
+                if(persons[j].getName().compareToIgnoreCase(persons[j + 1].getName()) > 0){ 
                     Person aux = persons[j];
                     persons[j] = persons[j + 1];
                     persons[j + 1] = aux;  
@@ -21,27 +23,29 @@ public class SortingMethods {
         }
     }
 
-    //Método Ordenamiento Selección 
+    /*
+     * Método Ordenamiento Selección, ordena por nombre, es decir alfabéticamente
+     * De forma DESCENDENTE
+     */
     public void sortByNameWithSelection(Person[] persons){
-        int indiceMin;
+        int indiceMax;
 
         for(int i = 0; i < persons.length - 1; i++){    //NO necesitamos llegar hasta el final del arreglo
 
-            indiceMin = i; //Toma como si el número menor estuviera en la posición i
+            indiceMax = i; //Toma como si el número mayor estuviera en la posición i
 
 	        //SEGUNDO FOR, sirve para encontrar la posición del número menor del arreglo
             for(int j = i + 1; j < persons.length; j++){                 
-                if(persons[j].getName().compareToIgnoreCase(persons[indiceMin].getName()) < 0){ //si el valor de j es menor al guardado en arreglo[indiceMin]
-                        indiceMin = j;   //hacemos que indiceMin tome el valor de la posición de dicho numero
-                        
+                if(persons[j].getName().compareToIgnoreCase(persons[indiceMax].getName()) > 0){ //si el valor de j es mayor al guardado en arreglo[indiceMax]
+                        indiceMax = j;                                                          //hacemos que indiceMax tome el valor de la posición de dicho numero
                 }
             } 
             
             //Se intercambia unicamente cuando se ha encontrado otro valor menor diferente al tomado por referencia (indiceMin = i)
-            if(indiceMin != i){ 
+            if(indiceMax != i){ 
                 Person aux = persons[i]; 
-                persons[i] = persons[indiceMin];
-                persons[indiceMin] = aux;
+                persons[i] = persons[indiceMax];
+                persons[indiceMax] = aux;
             }
         }
     }
