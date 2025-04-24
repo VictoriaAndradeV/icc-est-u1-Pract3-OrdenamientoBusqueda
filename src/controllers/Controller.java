@@ -2,7 +2,7 @@ package controllers;
 import models.Person; //importamos el paquete de la clase view
 import views.View;
 
-//Controla no muestra informacion ni implementa algoritmos de busqueda y ordenamiento, solo coordina
+//Controller no muestra informacion ni implementa algoritmos de busqueda y ordenamiento, solo coordina
 public class Controller {
     private final View views;
     private Person[] persons;
@@ -46,7 +46,10 @@ public class Controller {
         Person newPerson = views.inputPerson();
         addPerson(newPerson);
     }
-
+    /*
+     * cada que el usuario seleccione la opción 1 del menu
+     * se irán agregando nuevos objetos persona al arreglo
+     */
     public void addPerson(Person person){
         Person arreglo[] = new Person[persons.length + 1]; //guarda personas anteriores + la ingresada
             
@@ -57,7 +60,7 @@ public class Controller {
         persons = arreglo;
     
     }
-
+    //Método que ordena el arreglo de personas, por los diferentes métodos de ordenamiento
     public void sortPersons(){
         if((persons == null) || (persons.length == 0)){
             System.out.println("No hay registros de personas por ordenar");
@@ -82,9 +85,9 @@ public class Controller {
         }
 
         System.out.println("Listado de personas ordenado correctamente");
-        views.displayPersons(persons);
+        views.displayPersons(persons); //imprime el arreglo de personas ordenado
     }
-
+    
     public void searchPerson(){
         if((persons == null) || (persons.length == 0)){
             System.out.println("No hay registros de personas por buscar");
@@ -93,7 +96,7 @@ public class Controller {
         int opcion = views.selectSearchCriterion();
 
         switch(opcion){
-            case 1 -> {
+            case 1:
                 //Busqueda por edad
                 if(!searchMethods.isSortByAge(persons)){ //
                     sortingMethods.sortByAgeWithInsertion(persons);
@@ -106,23 +109,23 @@ public class Controller {
                 }else{ //si no la encuentra es porque retorno -1
                     views.displaySearchResult(null);
                 }
-            }
-            case 2 -> {
+                break;
+            case 2:
                 //Busqueda por nombre
                 if(!searchMethods.isSortByName(persons)){
                     sortingMethods.sortByNameWithSelection(persons);
                 }
                 String nombreBuscado = views.inputName();
-                int index = searchMethods.binarySearchByName(persons, nombreBuscado);
+                int indice = searchMethods.binarySearchByName(persons, nombreBuscado);
 
-                if(index >= 0){ //quiere decir que si se encontro la persona 
-                    views.displaySearchResult(persons[index]);
+                if(indice >= 0){ //quiere decir que si se encontro la persona 
+                    views.displaySearchResult(persons[indice]);
                 }else{
                     views.displaySearchResult(null);
                 }
-            }
-            case 3 -> {
-            }
+                break;
+            case 3:
+                break;
         }
     }
 }
